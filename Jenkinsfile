@@ -1,9 +1,9 @@
 pipeline {
    agent any
    environment {
-       app = 'shopping_app'
-       service = 'service2'
-       registry = 'deepanmurugan/python2'
+       app = 'shoppingapp'
+       service = 'shoppingapp-kids'
+       registry = 'deepanmurugan/shoppingapp-kids'
        registryCredential = 'dockerhub'
        dockerImage = ''
    }
