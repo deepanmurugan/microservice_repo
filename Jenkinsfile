@@ -41,7 +41,7 @@ pipeline {
            dir('/tmp/ansible-playbooks/') {
                script{
                    def image_id = registry + ":$BUILD_NUMBER"
-                   sh "ansible-playbook deploy_k8s.yml --extra-vars \"image_id=${image_id} app_name=${app_name} service_name=${service}\""
+                   sh "ansible-playbook deploy_k8s.yml --extra-vars \"image_id=${image_id} app_name=${app} service_name=${service}\""
                }
            }
            }
