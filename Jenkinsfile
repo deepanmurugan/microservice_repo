@@ -31,15 +31,19 @@ pipeline {
        }
        stage('Pull Playbook Repo') {
         steps {
+        dir('/tmp/ansible-playbooks/') {
           checkout poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', noTags: false, reference: '', shallow: false, timeout: 10]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_repo', url: 'https://github.com/deepanmurugan/Ansible_Playbook.git']]]
+          }
           }
        }
        stage ('Deploy') {
            steps {
+           dir('/tmp/ansible-playbooks/') {
                script{
                    def image_id = registry + ":$BUILD_NUMBER"
                    sh "ansible-playbook deploy_k8s.yml --extra-vars \"image_id=${image_id}\" \"app_name=${app_name}\" \"service_name=${service}\""
                }
+           }
            }
        }
    }
